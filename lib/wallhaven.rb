@@ -28,13 +28,14 @@ class Wallhaven
 
   def next_page
     @page += 1
-    current_page = query_search + "&page=#{@page.to_s}"
+    current_page = query_search + "&page=#{@page}"
   end
 
   def get_response(url)
     uri = URI(url)
     response = Net::HTTP.get(uri)
     return 0 if response.include?('Too Many Requests')
+
     JSON.parse(response)
   end
 
@@ -47,7 +48,7 @@ class Wallhaven
   end
 
   def self.download_image(directory_name, urls_images)
-    Dir.mkdir("images") unless File.exists?("images")
+    Dir.mkdir('images') unless File.exist?('images')
 
     puts 'Download images...'
 

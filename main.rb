@@ -10,7 +10,7 @@ require_relative 'lib/wallhaven'
 
 wallhaven = Wallhaven.read_config('settings.json')
 
-puts "Parsing..."
+puts 'Parsing...'
 
 loop do
   url = wallhaven.next_page
@@ -22,5 +22,3 @@ loop do
 end
 
 Wallhaven.download_image(wallhaven.tag, wallhaven.urls_images)
-
-
