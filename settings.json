@@ -1,6 +1,11 @@
 {
   "base_url": "https://wallhaven.cc/api/v1/search?",
   "api": "DTBP7O8kNsL2lnH8uxnX2skTWgm7LXo0",
+    "categories": "",
+    "purity": "",
+    "sorting": "",
+    "order": "",
+    "seed": "",
   "resolution": "1920x1080",
   "tag": "retrowave"
 }
