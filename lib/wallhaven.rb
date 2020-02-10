@@ -38,7 +38,7 @@ module Wallhaven
       "#{query_search}&page=#{@page}"
     end
 
-    def get_response(url)
+    def get_request(url)
       uri = URI(url)
       response = Net::HTTP.get(uri)
       return 0 if response.include?('Too Many Requests')

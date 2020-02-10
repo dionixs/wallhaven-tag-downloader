@@ -15,7 +15,7 @@ puts 'parsing...'
 
 loop do
   url = wallhaven.open_page
-  data = wallhaven.get_response(url)
+  data = wallhaven.get_request(url)
   break if data == 0
 
   result = wallhaven.parse(data)
