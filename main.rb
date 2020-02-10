@@ -2,18 +2,19 @@
 
 require 'byebug'
 
-require 'mechanize'
 require 'net/http'
 require 'json'
 
+require 'mechanize'
+
 require_relative 'lib/wallhaven'
 
-wallhaven = Wallhaven.read_config('settings.json')
+wallhaven = Wallhaven::Parser.read_config('settings.json')
 
-puts 'Parsing...'
+puts 'parsing...'
 
 loop do
-  url = wallhaven.next_page
+  url = wallhaven.open_page
   data = wallhaven.get_response(url)
   break if data == 0
 
