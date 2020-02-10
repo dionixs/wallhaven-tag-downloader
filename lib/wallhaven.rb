@@ -18,7 +18,9 @@ module Wallhaven
     end
 
     def self.read_config(path_to_config)
-      abort "Файл #{path_to_config} не найден!" unless File.exist?(path_to_config)
+      unless File.exist?(path_to_config)
+        abort "Файл #{path_to_config} не найден!"
+      end
 
       data = File.read(path_to_config, encoding: 'UTF-8')
       data_json = JSON.parse(data)
