@@ -28,7 +28,8 @@ module Wallhaven
     end
 
     def query_search
-      query = "&categories=#{@categories}&purity=#{@purity}&atleast=#{@resolution}&sorting=#{@sorting}&order=#{@order}"
+      query = "&categories=#{@categories}&purity=#{@purity}" \
+      "&atleast=#{@resolution}&sorting=#{@sorting}&order=#{@order}"
       token = "/apikey=#{@api}"
       "#{@base_url}q=#{@tag}#{query}#{token}"
     end
