@@ -3,7 +3,7 @@
 require 'byebug'
 
 require 'net/http'
-require 'json'
+require 'json/ext'
 
 require 'mechanize'
 
