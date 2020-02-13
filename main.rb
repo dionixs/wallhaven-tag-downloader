@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'byebug'
-
 require 'net/http'
 require 'json/ext'
 
