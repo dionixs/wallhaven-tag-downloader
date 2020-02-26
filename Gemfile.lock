@@ -35,6 +35,7 @@ PLATFORMS
 
 DEPENDENCIES
   mechanize
+  nokogiri
 
 BUNDLED WITH
    2.1.2
