@@ -4,7 +4,7 @@
 # Run
 ```
 bundle install
-ruby main.rb
+bundle exec ruby main.rb
 ```
 
 Before running the program, need to edit a file settings.json
