@@ -1,10 +1,10 @@
 {
   "base_url": "https://wallhaven.cc/api/v1/search?",
-  "api": "",
-  "categories": "111",
-  "purity": "100",
-  "sorting": "relevance",
-  "order": "desc",
-  "resolution": "1920x1080",
-  "tag": "retrowave"
+  "api": "<your_key>",
+  "categories": "<number>",
+  "purity": "<number>",
+  "sorting": "<sorting>",
+  "order": "<order>",
+  "resolution": "<your_resolution>",
+  "tag": "<tag_to_search>"
 }
