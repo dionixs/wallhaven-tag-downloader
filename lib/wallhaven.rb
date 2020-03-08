@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'json/ext'
+
 module Wallhaven
   class Parser
     attr_accessor :base_url, :api, :resolution, :tag, :urls_images
@@ -19,7 +21,7 @@ module Wallhaven
 
     def self.read_config(path_to_config)
       unless File.exist?(path_to_config)
-        abort "Файл #{path_to_config} не найден!"
+        abort "File #{path_to_config} does not exist!"
       end
 
       data = File.read(path_to_config, encoding: 'UTF-8')
@@ -41,29 +43,27 @@ module Wallhaven
 
     def get_request(url)
       uri = URI(url)
-      response = Net::HTTP.get(uri)
-      return 0 if response.include?('Too Many Requests')
+      Net::HTTP.get(uri)
+    end
 
+    def too_many_request?(response)
+      response.include?('Too Many Requests')
+    end
+
+    def json_parse(response)
       JSON.parse(response)
     end
 
-    def parse(data)
+    def parse_images(data)
       data['data'].each do |item|
         @urls_images << item['path']
       end
-
-      return 0 if data['data'].empty?
     end
-  end
 
-  def self.download_image(directory_name, urls_images)
-    Dir.mkdir('images') unless File.exist?('images')
-
-    puts 'download images...'
-
-    urls_images.each do |url|
-      agent = Mechanize.new
-      agent.get(url).save "images/#{directory_name}/#{File.basename(url)}"
+    def data_empty?(data)
+      data['data'].empty?
     end
+
+    private :query_search
   end
 end

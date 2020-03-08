@@ -1,11 +1,8 @@
 # frozen_string_literal: true
 
 require 'net/http'
-require 'json/ext'
-
-require 'mechanize'
-
 require_relative 'lib/wallhaven'
+require_relative 'lib/downloader'
 
 wallhaven = Wallhaven::Parser.read_config('settings.json')
 
@@ -13,11 +10,13 @@ puts 'parsing...'
 
 loop do
   url = wallhaven.open_page
-  data = wallhaven.get_request(url)
-  break if data == 0
+  response = wallhaven.get_request(url)
+  break if wallhaven.too_many_request?(response)
 
-  result = wallhaven.parse(data)
-  break if result == 0
+  data = wallhaven.json_parse(response)
+  break if wallhaven.data_empty?(data)
+
+  wallhaven.parse_images(data)
 end
 
-Wallhaven.download_image(wallhaven.tag, wallhaven.urls_images)
+Wallhaven::Downloader.download_images(wallhaven.tag, wallhaven.urls_images)
