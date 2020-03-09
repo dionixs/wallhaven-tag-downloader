@@ -3,6 +3,7 @@
 
 # Run
 ```
+gem install bundle
 bundle install
 bundle exec ruby main.rb
 ```
