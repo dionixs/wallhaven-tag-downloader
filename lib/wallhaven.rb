@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'net/http'
 require 'json/ext'
 
 module Wallhaven
@@ -27,13 +28,6 @@ module Wallhaven
       data = File.read(path_to_config, encoding: 'UTF-8')
       data_json = JSON.parse(data)
       new(data_json)
-    end
-
-    def query_search
-      query = "&categories=#{@categories}&purity=#{@purity}" \
-      "&atleast=#{@resolution}&sorting=#{@sorting}&order=#{@order}"
-      token = "/apikey=#{@api}"
-      "#{@base_url}q=#{@tag}#{query}#{token}"
     end
 
     def open_page
@@ -64,6 +58,22 @@ module Wallhaven
       data['data'].empty?
     end
 
-    private :query_search
+    def show_finished_status
+      ProgressBar.print_status(status_finished)
+    end
+
+    private
+
+    def query_search
+      query = "&categories=#{@categories}&purity=#{@purity}" \
+      "&atleast=#{@resolution}&sorting=#{@sorting}&order=#{@order}"
+      token = "/apikey=#{@api}"
+      "#{@base_url}q=#{@tag}#{query}#{token}"
+    end
+
+    def status_finished
+      "Received information about #{@urls_images.size}" \
+      " links to pictures by tag: #{@tag}"
+    end
   end
 end

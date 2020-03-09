@@ -25,6 +25,10 @@ GEM
     nokogiri (1.10.8)
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
+    progress (3.5.2)
+    tty-cursor (0.7.1)
+    tty-spinner (0.9.3)
+      tty-cursor (~> 0.7)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.6)
@@ -36,6 +40,8 @@ PLATFORMS
 DEPENDENCIES
   mechanize
   nokogiri
+  progress
+  tty-spinner
 
 RUBY VERSION
    ruby 2.7.0p0

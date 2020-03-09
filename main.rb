@@ -1,12 +1,17 @@
 # frozen_string_literal: true
 
-require 'net/http'
+require 'tty-spinner'
+require_relative 'lib/progress_bar'
 require_relative 'lib/wallhaven'
 require_relative 'lib/downloader'
 
 wallhaven = Wallhaven::Parser.read_config('settings.json')
 
-puts 'parsing...'
+status = "Search for pictures by given parameters from file: settings.json"
+
+spinner = TTY::Spinner.new("[:spinner] #{status}", format: :classic)
+
+spinner.auto_spin
 
 loop do
   url = wallhaven.open_page
@@ -18,5 +23,9 @@ loop do
 
   wallhaven.parse_images(data)
 end
+
+spinner.success('(successful)')
+
+wallhaven.show_finished_status
 
 Wallhaven::Downloader.download_images(wallhaven.tag, wallhaven.urls_images)
